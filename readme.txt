@@ -10,5 +10,9 @@
 (lấy dữ liệu từ preprocess_1.csv)
 -> preprocess_2.csv
 
-- Copy preprocessed_link.csv từ preprocess_2.csv
+- Chạy file preprocess_3.ipynb 
+(lấy dữ liệu từ preprocess_2.csv)
+-> preprocess_3.csv, missing_ministry.csv
+
+- Copy preprocessed_link.csv từ preprocess_3.csv
 

@@ -6,15 +6,15 @@
 - Close source models sử dụng OpenRouter API
 
 ## Open-source model selection:
-- `llama-3-7b`: https://huggingface.co/christopherBR/Llama-3-7B-Q4_K_M
-- `mistral-7b-instruct-v0.3`: https://huggingface.co/lmstudio-community/Mistral-7B-Instruct-v0.3-GGUF
-- `qwen2.5-7b-instruct-1m`: https://huggingface.co/lmstudio-community/Qwen2.5-7B-Instruct-1M-GGUF
-- `vicuna-7b-v1.5`: https://huggingface.co/TheBloke/vicuna-7B-v1.5-GGUF
-- `c4ai-command-r7b-12-2024-abliterated`: https://huggingface.co/bartowski/c4ai-command-r7b-12-2024-abliterated-GGUF
+- `llama-3-7b`: https://huggingface.co/christopherBR/Llama-3-7B-Q4_K_M => Llama 3 
+- `mistral-7b-instruct-v0.3`: https://huggingface.co/lmstudio-community/Mistral-7B-Instruct-v0.3-GGUF => Mistral instruct v0.3
+- `qwen2.5-7b-instruct-1m`: https://huggingface.co/lmstudio-community/Qwen2.5-7B-Instruct-1M-GGUF => Qwen 2.5 Instruct 1M
+- `vicuna-7b-v1.5`: https://huggingface.co/TheBloke/vicuna-7B-v1.5-GGUF => Vicuna v1.5
+- `c4ai-command-r7b-12-2024-abliterated`: https://huggingface.co/bartowski/c4ai-command-r7b-12-2024-abliterated-GGUF => Command R7B abliterated 
 
 ### Vietnamese support model selection:
-- `vistral-7b-chat`: https://huggingface.co/uonlp/Vistral-7B-Chat-gguf
-- `qwen2.5-7b-instruct-viet-sft`: https://huggingface.co/mradermacher/Qwen2.5-7B-Instruct-Viet-SFT-GGUF
+- `vistral-7b-chat`: https://huggingface.co/uonlp/Vistral-7B-Chat-gguf => Vistral Chat 
+- `qwen2.5-7b-instruct-viet-sft`: https://huggingface.co/mradermacher/Qwen2.5-7B-Instruct-Viet-SFT-GGUF => Qwen 2.5 Vietnamese Supervised Fine-tuning 
 
 ## Pre-planning: Open-source model (7b)
 

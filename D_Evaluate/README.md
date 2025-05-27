@@ -45,3 +45,7 @@
 
 - https://huggingface.co/Bachhoang/vbd-llama2-7B-standard-train-chat-GGUF
 - https://huggingface.co/mav23/Arcee-VyLinh-GGUF
+---
+- claude2-alpaca-7b
+- mistral-7b-v0.1
+- japanese-stablelm-instruct-gamma-7b

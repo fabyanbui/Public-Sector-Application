@@ -3,8 +3,8 @@ import pandas as pd
 import google.generativeai as genai
 import ast
 
-def main():
-    genai.configure(api_key="AIzaSyBgfCHHuM5aCU6CDOzq8TkmaRUR9CkNNEU")
+def main(api):
+    genai.configure(api_key=api)
     gem = genai.GenerativeModel('gemini-2.0-flash')
 
     file_path = "annotated_data/first_link.csv"

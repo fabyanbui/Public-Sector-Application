@@ -14,8 +14,8 @@ KHÔNG ĐƯỢC THAY ĐỔI BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI CH
 long = 200
 short = 100
 
-def main():
-    genai.configure(api_key="AIzaSyBgfCHHuM5aCU6CDOzq8TkmaRUR9CkNNEU")
+def main(api):
+    genai.configure(api_key=api)
     gem = genai.GenerativeModel('gemini-2.0-flash')
 
     file_path = "annotated_data/first_tthc.csv"

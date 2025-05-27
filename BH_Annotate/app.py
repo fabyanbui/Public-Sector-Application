@@ -1,6 +1,8 @@
 import streamlit as st
 import first_link, second_link, first_tthc, second_tthc
 
+api_key = "AIzaSyBgfCHHuM5aCU6CDOzq8TkmaRUR9CkNNEU"
+
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 st.title("👤 Spelling checking trong bộ dữ liệu dịch vụ công")
 
@@ -12,11 +14,11 @@ with tab:
     st.markdown(readme_contents, unsafe_allow_html=True)
     
 with tab1:
-    first_link.main()
+    first_link.main(api=api_key)
 with tab2:
-    second_link.main()
+    second_link.main(api=api_key)
 with tab3:
-    first_tthc.main()
+    first_tthc.main(api=api_key)
 with tab4:
-    second_tthc.main()
+    second_tthc.main(api=api_key)
 

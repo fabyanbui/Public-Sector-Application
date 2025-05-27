@@ -87,6 +87,7 @@ KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI 
     answer_prompt = \
 f"""TÔI SẼ ĐƯA CHO BẠN MỘT VĂN BẢN. BẠN KHÔNG CẦN SUY LUẬN GÌ CẢ.
 KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI CHÍNH TẢ VÀ SỬA LẠI CHO ĐÚNG:
+
 {original_answer}
 """
 

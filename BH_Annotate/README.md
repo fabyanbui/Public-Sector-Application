@@ -14,10 +14,8 @@
 
 ## Chú ý:
 
-- Không nên mở click vào 2 tab `First TTHC` và `Second TTHC` trong cùng 1 phiên Streamlit vì sẽ rất lâu (2 vòng lặp while True cho Gemini generator)
+- Tự thay đổi API trong `app.py` khi hết quota
 
-- **Sửa file nào thì vào file đó sửa thôi! Đợi lâu quá thì F5 hoặc thoát ra run lại app!**
-
-- Warning sau có thể bỏ qua trong UI của streamlit (có thể setting lại trong local config của streamlit lib)
+- **Warning sau có thể bỏ qua trong UI của streamlit** (có thể setting lại trong local config của streamlit lib)
 
 > The widget with key `<something>` was created with a default value but also had its value set via the Session State API.

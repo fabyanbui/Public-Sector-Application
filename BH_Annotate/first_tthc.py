@@ -70,7 +70,7 @@ def main(api):
         for col in cols:
             st.session_state[f'{col}_{index}_{file_path}'] = df[col][index]
         
-        df.at[index, 'lastUpdated'] = str(pd.Timestamp.now())
+        # df.at[index, 'lastUpdated'] = str(pd.Timestamp.now())
         df.to_csv(file_path, index=False)
 
     def on_b2_clicked():

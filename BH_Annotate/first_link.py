@@ -108,7 +108,7 @@ KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI 
         st.session_state[f'cauHoi_{index}_{file_path}'] = df.loc[index]['cauHoi']
         st.session_state[f'cauTraLoi_{index}_{file_path}'] = df.loc[index]['cauTraLoi']
         
-        df.at[index, 'lastUpdated'] = str(pd.Timestamp.now())
+        # df.at[index, 'lastUpdated'] = str(pd.Timestamp.now())
         df.to_csv(file_path, index=False)
 
     def on_b2_clicked():

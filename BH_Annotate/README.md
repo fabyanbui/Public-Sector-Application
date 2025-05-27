@@ -16,6 +16,8 @@
 
 - Tự thay đổi API trong `app.py` khi hết quota
 
+- **Nhấn `Generate` nhiều lần để gen ra đầy đủ (đối với TTHC) vì có thể hết quota giữa chừng**
+
 - **Warning sau có thể bỏ qua trong UI của streamlit** (có thể setting lại trong local config của streamlit lib)
 
 > The widget with key `<something>` was created with a default value but also had its value set via the Session State API.

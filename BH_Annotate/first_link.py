@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import google.generativeai as genai
 import ast
+import time
 
 def main(api):
     genai.configure(api_key=api)
@@ -26,7 +27,8 @@ def main(api):
         max_value=int(df.index.max()),
         value=int(df.index.min()),
         step=1,
-        format="%d"
+        format="%d",
+        key=f'number_input_{file_path}'
     )
 
     col1, col2 = st.columns([1, 1])
@@ -155,26 +157,32 @@ KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI 
 
     with col1:
         if f"suggested_question_{index}_{file_path}" not in st.session_state:
-            try:
-                st.session_state[f"suggested_question_{index}_{file_path}"] = gem.generate_content(question_prompt).text.strip()
-                st.text_area("🤖 Câu hỏi đề xuất từ Gemini", st.session_state[f"suggested_question_{index}_{file_path}"], 
-                             height=400, disabled=True, key=f"suggested_question_{index}_{file_path}")
-            except Exception as e:
-                st.text_area("🤖 Câu hỏi đề xuất từ Gemini", str(e), 
-                             height=400, disabled=True, key=f"suggested_question_{index}_{file_path}")
+            output = ""
+            while True:
+                try:
+                    output = gem.generate_content(question_prompt).text.strip()
+                    break                    
+                except Exception as e:
+                    time.sleep(1)
+            st.session_state[f"suggested_question_{index}_{file_path}"] = output
+            st.text_area("🤖 Câu hỏi đề xuất từ Gemini", st.session_state[f"suggested_question_{index}_{file_path}"], 
+                        height=400, disabled=True, key=f"suggested_question_{index}_{file_path}")
         else:
             st.text_area("🤖 Câu hỏi đề xuất từ Gemini", st.session_state[f"suggested_question_{index}_{file_path}"], 
-                         height=400, disabled=True, key=f"suggested_question_{index}_{file_path}")
-        
+                        height=400, disabled=True, key=f"suggested_question_{index}_{file_path}")
+
     with col2:
         if f"suggested_answer_{index}_{file_path}" not in st.session_state:
-            try:
-                st.session_state[f"suggested_answer_{index}_{file_path}"] = gem.generate_content(answer_prompt).text.strip()
-                st.text_area("🤖 Câu trả lời đề xuất từ Gemini", st.session_state[f"suggested_answer_{index}_{file_path}"], 
-                             height=400, disabled=True, key=f"suggested_answer_{index}_{file_path}")
-            except Exception as e:
-                st.text_area("🤖 Câu trả lời đề xuất từ Gemini", str(e), 
-                             height=400, disabled=True, key=f"suggested_answer_{index}_{file_path}")
+            output = ""
+            while True:
+                try:
+                    output = gem.generate_content(answer_prompt).text.strip()
+                    break                    
+                except Exception as e:
+                    time.sleep(1)
+            st.session_state[f"suggested_answer_{index}_{file_path}"] = output
+            st.text_area("🤖 Câu trả lời đề xuất từ Gemini", st.session_state[f"suggested_answer_{index}_{file_path}"], 
+                        height=400, disabled=True, key=f"suggested_answer_{index}_{file_path}")
         else:
             st.text_area("🤖 Câu trả lời đề xuất từ Gemini", st.session_state[f"suggested_answer_{index}_{file_path}"], 
-                         height=400, disabled=True, key=f"suggested_answer_{index}_{file_path}")
+                        height=400, disabled=True, key=f"suggested_answer_{index}_{file_path}")

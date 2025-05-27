@@ -35,7 +35,8 @@ def main(api):
         max_value=int(df.index.max()),
         value=int(df.index.min()),
         step=1,
-        format="%d"
+        format="%d",
+        key=f'number_input_{file_path}'
     )
 
     col1, col2 = st.columns([1, 1])

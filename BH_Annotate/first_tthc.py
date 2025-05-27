@@ -57,13 +57,13 @@ def main(api):
 
     cols = df.drop(columns=['link', 'maThuTuc', 'checked', 'lastUpdated']).columns
 
+    col_s1, col_s2, col_s3, col_s4 = st.columns([1, 1, 1, 1])
+
     col1, col2 = st.columns([1, 1])
 
     with col1:
         for col in cols:
             st.text_area(col, df[col][index], long, key=f'{col}_{index}_{file_path}')
-
-    col_s1, col_s2, col_s3, col_s4 = st.columns([1, 1, 1, 1])
 
     def on_b1_clicked():
         df.loc[index] = revert_df.loc[index]
@@ -107,24 +107,27 @@ def main(api):
     with col_s4:
         b4 = st.button('💾 Save', help='Update values in textbox and save to CSV', on_click=on_b4_clicked, key=f'b4_{index}_{file_path}')
 
+    with col2:
+        for col in cols:
+            st.text_area(f'Gemini đề xuất cho {col}', "", long, disabled=True, key=f'suggested_{col}_{index}_{file_path}')
+
+    def on_btn_clicked():
+        for col in cols:
+            if st.session_state[f'suggested_{col}_{index}_{file_path}'] != "":
+                if "429 You exceeded your current quota" not in st.session_state[f'suggested_{col}_{index}_{file_path}']:
+                    continue
+
+            prompt = template.format(col_name=col, information=df[col][index])
+            try:
+                output = gem.generate_content(prompt).text.strip()
+            except Exception as e:
+                output = str(e)
+            st.session_state[f'suggested_{col}_{index}_{file_path}'] = output
+
+    _, col_btn = st.columns([1, 1])
+    with col_btn:
+        btn = st.button('⚡ Generate', on_click=on_btn_clicked, key=f'btn_{index}_{file_path}')
+
     st.markdown("---")
     st.write(df.loc[index])
     st.dataframe(df)
-
-    with col2:
-        for col in cols:
-            if f'suggested_{col}_{index}_{file_path}' in st.session_state:
-                st.text_area(f'Gemini đề xuất cho {col}', st.session_state[f'suggested_{col}_{index}_{file_path}'], 
-                             long, disabled=True, key=f'suggested_{col}_{index}_{file_path}')
-                continue
-            prompt = template.format(col_name=col, information=df[col][index])
-            output = ""
-            while True:
-                try:
-                    output = gem.generate_content(prompt).text.strip()
-                    break
-                except Exception as e:
-                    time.sleep(1)
-            st.session_state[f'suggested_{col}_{index}_{file_path}'] = output
-            st.text_area(f'Gemini đề xuất cho {col}', st.session_state[f'suggested_{col}_{index}_{file_path}'], 
-                         long, disabled=True, key=f'suggested_{col}_{index}_{file_path}')

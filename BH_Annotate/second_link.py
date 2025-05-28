@@ -2,13 +2,14 @@ import streamlit as st
 import pandas as pd
 import google.generativeai as genai
 import ast
+import time
 
 def main(api):
     genai.configure(api_key=api)
     gem = genai.GenerativeModel('gemini-2.0-flash')
 
-    file_path = "annotated_data/second_link.csv"
-    revert_path = "preprocessed_data/second_link.csv"
+    file_path = "annotated_data/first_link.csv"
+    revert_path = "preprocessed_data/first_link.csv"
 
     def load_data(path):
         tmp_df = pd.read_csv(path, dtype={'lastUpdated': str})
@@ -26,7 +27,8 @@ def main(api):
         max_value=int(df.index.max()),
         value=int(df.index.min()),
         step=1,
-        format="%d"
+        format="%d",
+        key=f'number_input_{file_path}'
     )
 
     col1, col2 = st.columns([1, 1])
@@ -87,6 +89,7 @@ KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI 
     answer_prompt = \
 f"""TÔI SẼ ĐƯA CHO BẠN MỘT VĂN BẢN. BẠN KHÔNG CẦN SUY LUẬN GÌ CẢ.
 KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI CHÍNH TẢ VÀ SỬA LẠI CHO ĐÚNG:
+
 {original_answer}
 """
 
@@ -95,9 +98,7 @@ KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI 
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        cauHoi = st.text_area("🟦 Câu hỏi gốc (có thể chỉnh sửa)", original_question, height=400, key=f'cauHoi_{index}_{file_path}')
-
-    with col2:
+        cauHoi = st.text_area("🟦 Câu hỏi gốc (có thể chỉnh sửa)", original_question, height=200, key=f'cauHoi_{index}_{file_path}')
         cauTraLoi = st.text_area("🟩 Câu trả lời gốc (có thể chỉnh sửa)", original_answer, height=400, key=f'cauTraLoi_{index}_{file_path}')
 
     def on_b1_clicked():
@@ -107,7 +108,7 @@ KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI 
         st.session_state[f'cauHoi_{index}_{file_path}'] = df.loc[index]['cauHoi']
         st.session_state[f'cauTraLoi_{index}_{file_path}'] = df.loc[index]['cauTraLoi']
         
-        df.at[index, 'lastUpdated'] = str(pd.Timestamp.now())
+        # df.at[index, 'lastUpdated'] = str(pd.Timestamp.now())
         df.to_csv(file_path, index=False)
 
     def on_b2_clicked():
@@ -130,8 +131,8 @@ KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI 
 
     def on_b4_clicked():
         df.at[index, 'checked'] = True
-        df.at[index, 'cauHoi'] = cauHoi
-        df.at[index, 'cauTraLoi'] = cauTraLoi
+        df.at[index, 'cauHoi'] = st.session_state[f'cauHoi_{index}_{file_path}']
+        df.at[index, 'cauTraLoi'] = st.session_state[f'cauTraLoi_{index}_{file_path}']
 
         df.at[index, 'lastUpdated'] = str(pd.Timestamp.now())
         df.to_csv(file_path, index=False)
@@ -148,32 +149,27 @@ KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI 
     with col_s4:
         b4 = st.button('💾 Save', help='Update values in textbox and save to CSV', on_click=on_b4_clicked, key=f'b4_{index}_{file_path}')
 
+    with col2:
+        st.text_area("🤖 Câu hỏi đề xuất từ Gemini", "", height=200, disabled=True, key=f"suggested_question_{index}_{file_path}")
+        st.text_area("🤖 Câu trả lời đề xuất từ Gemini", "", height=400, disabled=True, key=f"suggested_answer_{index}_{file_path}")
+
+    def on_btn_clicked():
+        try:
+            output = gem.generate_content(question_prompt).text.strip()
+        except Exception as e:
+            output = str(e)
+        st.session_state[f"suggested_question_{index}_{file_path}"] = output
+
+        try:
+            output = gem.generate_content(answer_prompt).text.strip()
+        except Exception as e:
+            output = str(e)
+        st.session_state[f"suggested_answer_{index}_{file_path}"] = output
+
+    _, col_btn = st.columns([1, 1])
+    with col_btn:
+        btn = st.button('⚡ Generate', on_click=on_btn_clicked, key=f'btn_{index}_{file_path}')
+
     st.markdown("---")
     st.write(df.loc[index])
     st.dataframe(df[['checked', 'lastUpdated', 'cauHoi', 'cauTraLoi', 'boNganh', 'phanLoai', 'link', 'TTHCLienQuan', 'cauHoiLienQuan']], use_container_width=True)
-
-    with col1:
-        if f"suggested_question_{index}_{file_path}" not in st.session_state:
-            try:
-                st.session_state[f"suggested_question_{index}_{file_path}"] = gem.generate_content(question_prompt).text.strip()
-                st.text_area("🤖 Câu hỏi đề xuất từ Gemini", st.session_state[f"suggested_question_{index}_{file_path}"], 
-                             height=400, disabled=True, key=f"suggested_question_{index}_{file_path}")
-            except Exception as e:
-                st.text_area("🤖 Câu hỏi đề xuất từ Gemini", str(e), 
-                             height=400, disabled=True, key=f"suggested_question_{index}_{file_path}")
-        else:
-            st.text_area("🤖 Câu hỏi đề xuất từ Gemini", st.session_state[f"suggested_question_{index}_{file_path}"], 
-                         height=400, disabled=True, key=f"suggested_question_{index}_{file_path}")
-        
-    with col2:
-        if f"suggested_answer_{index}_{file_path}" not in st.session_state:
-            try:
-                st.session_state[f"suggested_answer_{index}_{file_path}"] = gem.generate_content(answer_prompt).text.strip()
-                st.text_area("🤖 Câu trả lời đề xuất từ Gemini", st.session_state[f"suggested_answer_{index}_{file_path}"], 
-                             height=400, disabled=True, key=f"suggested_answer_{index}_{file_path}")
-            except Exception as e:
-                st.text_area("🤖 Câu trả lời đề xuất từ Gemini", str(e), 
-                             height=400, disabled=True, key=f"suggested_answer_{index}_{file_path}")
-        else:
-            st.text_area("🤖 Câu trả lời đề xuất từ Gemini", st.session_state[f"suggested_answer_{index}_{file_path}"], 
-                         height=400, disabled=True, key=f"suggested_answer_{index}_{file_path}")

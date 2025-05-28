@@ -131,8 +131,8 @@ KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI 
 
     def on_b4_clicked():
         df.at[index, 'checked'] = True
-        df.at[index, 'cauHoi'] = cauHoi
-        df.at[index, 'cauTraLoi'] = cauTraLoi
+        df.at[index, 'cauHoi'] = st.session_state[f'cauHoi_{index}_{file_path}']
+        df.at[index, 'cauTraLoi'] = st.session_state[f'cauTraLoi_{index}_{file_path}']
 
         df.at[index, 'lastUpdated'] = str(pd.Timestamp.now())
         df.to_csv(file_path, index=False)

@@ -8,8 +8,8 @@ def main(api):
     genai.configure(api_key=api)
     gem = genai.GenerativeModel('gemini-2.0-flash')
 
-    file_path = "annotated_data/second_link.csv"
-    revert_path = "preprocessed_data/second_link.csv"
+    file_path = "annotated_data/first_link.csv"
+    revert_path = "preprocessed_data/first_link.csv"
 
     def load_data(path):
         tmp_df = pd.read_csv(path, dtype={'lastUpdated': str})
@@ -131,8 +131,8 @@ KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI 
 
     def on_b4_clicked():
         df.at[index, 'checked'] = True
-        df.at[index, 'cauHoi'] = cauHoi
-        df.at[index, 'cauTraLoi'] = cauTraLoi
+        df.at[index, 'cauHoi'] = st.session_state[f'cauHoi_{index}_{file_path}']
+        df.at[index, 'cauTraLoi'] = st.session_state[f'cauTraLoi_{index}_{file_path}']
 
         df.at[index, 'lastUpdated'] = str(pd.Timestamp.now())
         df.to_csv(file_path, index=False)

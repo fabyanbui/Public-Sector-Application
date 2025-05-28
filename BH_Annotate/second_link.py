@@ -8,8 +8,8 @@ def main(api):
     genai.configure(api_key=api)
     gem = genai.GenerativeModel('gemini-2.0-flash')
 
-    file_path = "annotated_data/first_link.csv"
-    revert_path = "preprocessed_data/first_link.csv"
+    file_path = "annotated_data/second_link.csv"
+    revert_path = "preprocessed_data/second_link.csv"
 
     def load_data(path):
         tmp_df = pd.read_csv(path, dtype={'lastUpdated': str})

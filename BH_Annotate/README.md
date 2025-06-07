@@ -21,3 +21,9 @@
 - **Warning sau có thể bỏ qua trong UI của streamlit** (có thể setting lại trong local config của streamlit lib)
 
 > The widget with key `<something>` was created with a default value but also had its value set via the Session State API.
+
+## Thứ tự chạy file:
+
+- Chạy `setup_link_annotate.ipynb` để thiết lập môi trường
+- Human spelling checking bằng streamlit UI
+- Chạy `postprocess.ipynb` để xuất dữ liệu cuối cùng sau khi kiểm tra chính tả

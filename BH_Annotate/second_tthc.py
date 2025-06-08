@@ -116,7 +116,12 @@ def main(api):
             if st.session_state[f'suggested_{col}_{index}_{file_path}'] != "":
                 if "429 You exceeded your current quota" not in st.session_state[f'suggested_{col}_{index}_{file_path}']:
                     continue
-                
+                if 'Không có thông tin' in st.session_state[f'{col}_{index}_{file_path}']:
+                    continue
+                if col in ['maThuTuc', 'soQuyetDinh', 'capThucHien', 'loaiThuTuc', 'linhVuc']:
+                    continue
+                if len(st.session_state[f'{col}_{index}_{file_path}']) < 10:
+                    continue
             prompt = template.format(col_name=col, information=df[col][index])
             try:
                 output = gem.generate_content(prompt).text.strip()

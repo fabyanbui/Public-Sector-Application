@@ -1,8 +1,9 @@
 import streamlit as st
 import first_link, second_link, first_tthc, second_tthc
 
-api_key = "AIzaSyBgfCHHuM5aCU6CDOzq8TkmaRUR9CkNNEU"
+api_key = "AIzaSyDgDvc-ZiRSNqEg9XsZ67Xesm-Gum43PKY"
 
+#AIzaSyBgfCHHuM5aCU6CDOzq8TkmaRUR9CkNNEU
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 st.title("👤 Spelling checking trong bộ dữ liệu dịch vụ công")
 

@@ -1,0 +1,19 @@
+﻿,evaluate_context,evaluate_template
+open_source,"Bạn sẽ đóng vai trò là một người đánh giá câu trả lời (answer judge). Với một câu hỏi và câu trả lời, mục tiêu của bạn là xác định xem câu trả lời được cung cấp có chứa thông tin không đúng sự thật hoặc thông tin ảo giác (hallucinated information) hay không.
+{pattern}
+Bạn nên cố gắng hết sức để xác định xem câu trả lời có chứa thông tin không đúng sự thật hoặc thông tin ảo giác hay không. Câu trả lời bạn đưa ra bắt buộc CHỈ là ""Có"" hoặc ""Không"", và không giải thích gì thêm. Trả lời ""Có"" nếu câu trả lời chứa thông tin ảo giác, trả lời ""Không"" nếu câu trả lời không chứa thông tin ảo giác.
+","#Câu hỏi#: {question}
+
+#Câu trả lời#: {answer}
+
+#Đánh giá của bạn#:
+"
+close_source,"Bạn sẽ đóng vai trò là một người đánh giá câu trả lời (answer judge). Với một câu hỏi và câu trả lời, mục tiêu của bạn là xác định xem câu trả lời được cung cấp có chứa thông tin không đúng sự thật hoặc thông tin ảo giác (hallucinated information) hay không.
+{pattern}
+Bạn nên cố gắng hết sức để xác định xem câu trả lời có chứa thông tin không đúng sự thật hoặc thông tin ảo giác hay không. Câu trả lời bạn đưa ra bắt buộc CHỈ là ""Có"" hoặc ""Không"", và không giải thích gì thêm. Trả lời ""Có"" nếu câu trả lời chứa thông tin ảo giác, trả lời ""Không"" nếu câu trả lời không chứa thông tin ảo giác.
+","#Câu hỏi#: {question}
+
+#Câu trả lời#: {answer}
+
+#Đánh giá của bạn#:
+"

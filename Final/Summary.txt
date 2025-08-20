@@ -1,0 +1,9 @@
+Tên đề tài tiếng Việt: Mô hình phát hiện ảo giác của mô hình ngôn ngữ lớn trong ngữ cảnh dịch vụ công
+
+Tên đề tài tiếng Anh: Hallucination Detection Model for Large Language Models in the Context of Public Services
+
+Trong bối cảnh các mô hình ngôn ngữ lớn (LLMs) ngày càng được ứng dụng rộng rãi, hiện tượng “ảo giác” (hallucination) vẫn là một thách thức lớn, đặc biệt trong lĩnh vực dịch vụ công – nơi tính chính xác và tuân thủ pháp lý có vai trò then chốt. Đề tài này tập trung nghiên cứu và giải quyết bài toán phát hiện ảo giác của LLMs trong ngữ cảnh dịch vụ công tại Việt Nam.
+
+Hướng tiếp cận của đề tài là xây dựng một bộ dữ liệu chuyên biệt mang tên VietPS-Hallu, được phát triển thông qua quy trình đầy đủ: thu thập dữ liệu từ Cổng Dịch vụ công Quốc gia, tiền xử lý để loại bỏ trùng lặp và dữ liệu thiếu, sinh câu trả lời ảo giác có kiểm soát, và đánh giá thủ công nhằm đảm bảo chất lượng đầu vào và đầu ra. Bộ dữ liệu bao gồm cả tri thức chuyên ngành (thủ tục hành chính) và câu trả lời ảo giác, cho phép đánh giá mô hình toàn diện trên hai khía cạnh: mức độ thích ứng theo từng bộ/ngành và theo từng loại ảo giác (pattern).
+
+Kết quả thực nghiệm cho thấy, khi chưa được hỗ trợ kiến thức liên quan, hầu hết các mô hình gặp nhiều hạn chế trong việc phát hiện ảo giác, với độ chính xác chỉ dao động quanh mức 50%. Một số mô hình mã nguồn mở, tiêu biểu là WizardLM-2 và Qwen-Viet, cho thấy tiềm năng vượt trội so với cả các mô hình mã nguồn đóng. Kết quả này khẳng định tính phức tạp của bài toán phát hiện ảo giác trong lĩnh vực pháp lý – hành chính, đồng thời nhấn mạnh vai trò quan trọng của VietPS-Hallu như một bộ dữ liệu chuẩn để huấn luyện và tinh chỉnh LLMs, góp phần nâng cao độ tin cậy và chính xác trong ứng dụng dịch vụ công.

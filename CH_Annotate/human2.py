@@ -27,19 +27,19 @@ def main():
         key=f'number_input_{file_path}'
     )
 
-    st.write(f'**Câu hỏi:** {df.iloc[index]['cauHoi']}')
+    st.write(f"**Câu hỏi:** {df.iloc[index]['cauHoi']}")
     
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        st.write(f'**Pattern:** {pattern[df.iloc[index]['pattern']]}')
+        st.write(f"**Pattern:** {pattern[df.iloc[index]['pattern']]}")
 
     with col2:
         col2_1, col2_2 = st.columns([1, 1])
         with col2_1:
-            st.write(f'**Checked:** {df.iloc[index]['checked']}')
+            st.write(f"**Checked:** {df.iloc[index]['checked']}")
         with col2_2:
-            st.write(f'**Hallucinated:** {df.iloc[index]['hallucinated']}')
+            st.write(f"**Hallucinated:** {df.iloc[index]['hallucinated']}")
 
     def on_b1():
         df.at[index, 'checked'] = False

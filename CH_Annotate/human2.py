@@ -18,7 +18,7 @@ def main():
         df[col] = df[col].apply(lambda x: ast.literal_eval(x) if pd.notna(x) else [])
 
     index = st.number_input(
-        "🔎 Chọn dòng để chỉnh sửa:",
+        " Chọn dòng để chỉnh sửa:",
         min_value=int(df.index.min()),
         max_value=int(df.index.max()),
         value=int(df.index.min()),
@@ -94,7 +94,7 @@ def main():
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        with st.expander("📌 TTHC liên quan"):
+        with st.expander(" TTHC liên quan"):
             if df.loc[index]['TTHCLienQuan']:
                 for link in df.loc[index]['TTHCLienQuan']:
                     st.markdown(f"- {link}")
@@ -102,7 +102,7 @@ def main():
                 st.write("Không có.")
 
     with col2:
-        with st.expander("❓ Câu hỏi liên quan"):
+        with st.expander(" Câu hỏi liên quan"):
             if df.loc[index]['cauHoiLienQuan']:
                 for link in df.loc[index]['cauHoiLienQuan']:
                     st.markdown(f"- {link}")

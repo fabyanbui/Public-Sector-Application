@@ -4,7 +4,7 @@ import time
 import human1, human2, recheck
 
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
-st.title("👤 Human annotation trong bộ dữ liệu dịch vụ công")
+st.title(" Human annotation trong bộ dữ liệu dịch vụ công")
 
 tab, tab1, tab2, tab3= st.tabs(["Home", "First human", "Second human", "Recheck"])
 

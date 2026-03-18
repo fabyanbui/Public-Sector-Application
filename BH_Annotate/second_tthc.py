@@ -30,7 +30,7 @@ def main(api):
     revert_df = load_data(revert_path)
 
     index = st.number_input(
-        "🔎 Chọn dòng để chỉnh sửa:",
+        " Chọn dòng để chỉnh sửa:",
         min_value=int(df.index.min()),
         max_value=int(df.index.max()),
         value=int(df.index.min()),
@@ -44,16 +44,16 @@ def main(api):
     with col1:
         col11, col12 = st.columns([1, 1])
         with col11:
-            st.markdown(f"**🔗 Link:** [Truy cập]({df.loc[index]['link']})")
+            st.markdown(f"** Link:** [Truy cập]({df.loc[index]['link']})")
         with col12:
             st.markdown(f"**🆔 Mã thủ tục:** {df.loc[index]['maThuTuc']}")
 
     with col2:
         col21, col22 = st.columns([1, 1])
         with col21:
-            st.markdown(f"**✎ Checked:** {"✅" if df.loc[index]['checked'] else "❌"}")
+            st.markdown(f"**Checked:** {'Yes' if df.loc[index]['checked'] else 'No'}")
         with col22:
-            st.markdown(f"**📅 Last updated:** {str(df.loc[index]['lastUpdated'])}")
+            st.markdown(f"** Last updated:** {str(df.loc[index]['lastUpdated'])}")
 
     cols = df.drop(columns=['link', 'maThuTuc', 'checked', 'lastUpdated']).columns
 
@@ -96,16 +96,16 @@ def main(api):
         df.to_csv(file_path, index=False)
 
     with col_s1:
-        b1 = st.button('🔄 Revert', help='Back to initial data and save to CSV', on_click=on_b1_clicked, key=f'b1_{index}_{file_path}')
+        b1 = st.button(' Revert', help='Back to initial data and save to CSV', on_click=on_b1_clicked, key=f'b1_{index}_{file_path}')
 
     with col_s2:
-        b2 = st.button('❌ Unchecked', help='Only uncheck and save to CSV', on_click=on_b2_clicked, key=f'b2_{index}_{file_path}')
+        b2 = st.button(' Unchecked', help='Only uncheck and save to CSV', on_click=on_b2_clicked, key=f'b2_{index}_{file_path}')
 
     with col_s3:
-        b3 = st.button('✅ Checked', help='Only check and save to CSV', on_click=on_b3_clicked, key=f'b3_{index}_{file_path}')
+        b3 = st.button(' Checked', help='Only check and save to CSV', on_click=on_b3_clicked, key=f'b3_{index}_{file_path}')
 
     with col_s4:
-        b4 = st.button('💾 Save', help='Update values in textbox and save to CSV', on_click=on_b4_clicked, key=f'b4_{index}_{file_path}')
+        b4 = st.button(' Save', help='Update values in textbox and save to CSV', on_click=on_b4_clicked, key=f'b4_{index}_{file_path}')
 
     with col2:
         for col in cols:
@@ -131,7 +131,7 @@ def main(api):
 
     _, col_btn = st.columns([1, 1])
     with col_btn:
-        btn = st.button('⚡ Generate', on_click=on_btn_clicked, key=f'btn_{index}_{file_path}')
+        btn = st.button(' Generate', on_click=on_btn_clicked, key=f'btn_{index}_{file_path}')
 
     st.markdown("---")
     st.write(df.loc[index])

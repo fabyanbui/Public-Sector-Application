@@ -22,7 +22,7 @@ def main(api):
     revert_df = load_data(revert_path)
 
     index = st.number_input(
-        "🔎 Chọn dòng để chỉnh sửa:",
+        " Chọn dòng để chỉnh sửa:",
         min_value=int(df.index.min()),
         max_value=int(df.index.max()),
         value=int(df.index.min()),
@@ -34,35 +34,35 @@ def main(api):
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        st.markdown(f"**🔗 Link:** [{df.loc[index]['link']}]({df.loc[index]['link']})")
+        st.markdown(f"** Link:** [{df.loc[index]['link']}]({df.loc[index]['link']})")
 
     with col2:
         col21, col22 = st.columns([1, 1])
         with col21:
-            st.markdown(f"**✎ Checked:** {"✅" if df.loc[index]['checked'] else "❌"}")
+            st.markdown(f"**Checked:** {'Yes' if df.loc[index]['checked'] else 'No'}")
         with col22:
-            st.markdown(f"**📅 Last updated:** {str(df.loc[index]['lastUpdated'])}")
+            st.markdown(f"** Last updated:** {str(df.loc[index]['lastUpdated'])}")
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown(f"**🏛️ Bộ/ngành:** {df.loc[index]['boNganh']}")
+        st.markdown(f"** Bộ/ngành:** {df.loc[index]['boNganh']}")
 
     with col2:
         phanloai_set = set(df.loc[index]['phanLoai'])
         phanloai_mapping = {
-            "công dân": "👤 Công dân",
-            "doanh nghiệp": "🏢 Doanh nghiệp",
-            "tổ chức khác": "🏛️ Tổ chức khác"
+            "công dân": " Công dân",
+            "doanh nghiệp": " Doanh nghiệp",
+            "tổ chức khác": " Tổ chức khác"
         }
         phanloai_str = [phanloai_mapping.get(p.lower(), p) for p in phanloai_set]
-        phanloai_str = " | ".join(phanloai_str) if phanloai_str else "🚫 Không phân loại"
-        st.markdown(f"**📂 Phân loại:** {phanloai_str}")
+        phanloai_str = " | ".join(phanloai_str) if phanloai_str else " Không phân loại"
+        st.markdown(f"** Phân loại:** {phanloai_str}")
 
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        with st.expander("📌 TTHC liên quan"):
+        with st.expander(" TTHC liên quan"):
             if df.loc[index]['TTHCLienQuan']:
                 for link in df.loc[index]['TTHCLienQuan']:
                     st.markdown(f"- {link}")
@@ -70,7 +70,7 @@ def main(api):
                 st.write("Không có.")
 
     with col2:
-        with st.expander("❓ Câu hỏi liên quan"):
+        with st.expander(" Câu hỏi liên quan"):
             if df.loc[index]['cauHoiLienQuan']:
                 for link in df.loc[index]['cauHoiLienQuan']:
                     st.markdown(f"- {link}")
@@ -98,8 +98,8 @@ KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI 
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        cauHoi = st.text_area("🟦 Câu hỏi gốc (có thể chỉnh sửa)", original_question, height=200, key=f'cauHoi_{index}_{file_path}')
-        cauTraLoi = st.text_area("🟩 Câu trả lời gốc (có thể chỉnh sửa)", original_answer, height=400, key=f'cauTraLoi_{index}_{file_path}')
+        cauHoi = st.text_area(" Câu hỏi gốc (có thể chỉnh sửa)", original_question, height=200, key=f'cauHoi_{index}_{file_path}')
+        cauTraLoi = st.text_area(" Câu trả lời gốc (có thể chỉnh sửa)", original_answer, height=400, key=f'cauTraLoi_{index}_{file_path}')
 
     def on_b1_clicked():
         # df.at[index, 'checked'] = False
@@ -138,20 +138,20 @@ KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI 
         df.to_csv(file_path, index=False)
 
     with col_s1:
-        b1 = st.button('🔄 Revert', help='Back to initial data and save to CSV', on_click=on_b1_clicked, key=f'b1_{index}_{file_path}')
+        b1 = st.button(' Revert', help='Back to initial data and save to CSV', on_click=on_b1_clicked, key=f'b1_{index}_{file_path}')
 
     with col_s2:
-        b2 = st.button('❌ Unchecked', help='Only uncheck and save to CSV', on_click=on_b2_clicked, key=f'b2_{index}_{file_path}')
+        b2 = st.button(' Unchecked', help='Only uncheck and save to CSV', on_click=on_b2_clicked, key=f'b2_{index}_{file_path}')
 
     with col_s3:
-        b3 = st.button('✅ Checked', help='Only check and save to CSV', on_click=on_b3_clicked, key=f'b3_{index}_{file_path}')
+        b3 = st.button(' Checked', help='Only check and save to CSV', on_click=on_b3_clicked, key=f'b3_{index}_{file_path}')
 
     with col_s4:
-        b4 = st.button('💾 Save', help='Update values in textbox and save to CSV', on_click=on_b4_clicked, key=f'b4_{index}_{file_path}')
+        b4 = st.button(' Save', help='Update values in textbox and save to CSV', on_click=on_b4_clicked, key=f'b4_{index}_{file_path}')
 
     with col2:
-        st.text_area("🤖 Câu hỏi đề xuất từ Gemini", "", height=200, disabled=True, key=f"suggested_question_{index}_{file_path}")
-        st.text_area("🤖 Câu trả lời đề xuất từ Gemini", "", height=400, disabled=True, key=f"suggested_answer_{index}_{file_path}")
+        st.text_area(" Câu hỏi đề xuất từ Gemini", "", height=200, disabled=True, key=f"suggested_question_{index}_{file_path}")
+        st.text_area(" Câu trả lời đề xuất từ Gemini", "", height=400, disabled=True, key=f"suggested_answer_{index}_{file_path}")
 
     def on_btn_clicked():
         try:
@@ -168,7 +168,7 @@ KHÔNG ĐƯỢC CHỈNH SỬA BẤT KỲ NỘI DUNG GÌ. CHỈ KIỂM TRA LỖI 
 
     _, col_btn = st.columns([1, 1])
     with col_btn:
-        btn = st.button('⚡ Generate', on_click=on_btn_clicked, key=f'btn_{index}_{file_path}')
+        btn = st.button(' Generate', on_click=on_btn_clicked, key=f'btn_{index}_{file_path}')
 
     st.markdown("---")
     st.write(df.loc[index])

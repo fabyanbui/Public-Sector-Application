@@ -5,7 +5,7 @@ api_key = "AIzaSyDgDvc-ZiRSNqEg9XsZ67Xesm-Gum43PKY"
 
 #AIzaSyBgfCHHuM5aCU6CDOzq8TkmaRUR9CkNNEU
 st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
-st.title("👤 Spelling checking trong bộ dữ liệu dịch vụ công")
+st.title(" Spelling checking trong bộ dữ liệu dịch vụ công")
 
 tab, tab1, tab2, tab3, tab4 = st.tabs(["Home", "First link", "Second link", "First TTHC", "Second TTHC"])
 
